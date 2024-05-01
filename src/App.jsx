@@ -17,10 +17,15 @@ function App() {
   };
 
   return (
-    <div>
+    <>
+      <div className='left'>
       <PersonalDetailsForm onFormSubmit={handleSubmit} />
-      <PersonalDetailsDisplay formData={formData} />
-    </div>
+      </div>
+      
+      <div className='right'>
+        <PersonalDetailsDisplay formData={formData} />
+      </div>
+    </>
   );
 }
 
