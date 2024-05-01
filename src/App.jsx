@@ -1,11 +1,26 @@
-import { useState } from 'react';
-import './styles/index.css';
+import React, { useState } from 'react';
+import PersonalDetailsForm from './components/personalDetailsForm';
+import PersonalDetailsDisplay from './components/personalDetailsDisplay';
 
 function App() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    placeOfBirth: '',
+  });
+
+  const handleSubmit = (data) => {
+    console.log('Submitted values:', data);
+    setFormData(data);
+  };
+
   return (
-    <>
-      <div>Testing</div>
-    </>
+    <div>
+      <PersonalDetailsForm onFormSubmit={handleSubmit} />
+      <PersonalDetailsDisplay formData={formData} />
+    </div>
   );
 }
 
