@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Input from './input';
 
-function WorkExperienceForm({ onFormSubmit }) {
+function WorkExperienceForm({ onFormSubmit, toggleForm, deleteForm, formData }) {
   const [localFormData, setLocalFormData] = useState({
-    companyName: '',
-    positionTitle: '',
-    jobResponsibilities: '',
-    startDate: '',
-    endDate: '',
+    companyName: formData.companyName,
+    positionTitle: formData.positionTitle,
+    jobResponsibilities: formData.jobResponsibilities,
+    startDate: formData.startDate,
+    endDate: formData.endDate,
   });
 
   const handleChange = (e) => {
@@ -20,8 +20,8 @@ function WorkExperienceForm({ onFormSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(localFormData);
     onFormSubmit(localFormData);
+    toggleForm();
   };
 
   return (
@@ -59,6 +59,10 @@ function WorkExperienceForm({ onFormSubmit }) {
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
+      <button type="button" onClick={toggleForm}>
+        Cancel
+      </button>
+      <button onClick={deleteForm}>Delete</button>
     </form>
   );
 }

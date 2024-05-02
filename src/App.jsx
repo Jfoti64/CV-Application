@@ -55,7 +55,7 @@ function App() {
     setEducationForms(educationForms.filter((form) => form.id !== id));
   };
 
-  const toggleFormVisibility = (id) => {
+  const toggleEducationFormVisibility = (id) => {
     setEducationForms((currentForms) =>
       currentForms.map((form) => (form.id === id ? { ...form, isVisible: !form.isVisible } : form))
     );
@@ -70,12 +70,13 @@ function App() {
       jobResponsibilities: '',
       startDate: '',
       endDate: '',
+      isVisible: true,
     },
   ]);
 
   const handleWorkExperienceFormSubmit = (id, formData) => {
     setWorkExperienceForms((currentForms) =>
-      currentForms.map((form) => (form.id === id ? { ...formData, id: form.id } : form))
+      currentForms.map((form) => (form.id === id ? { ...form, ...formData } : form))
     );
   };
 
@@ -87,11 +88,20 @@ function App() {
       jobResponsibilities: '',
       startDate: '',
       endDate: '',
+      isVisible: true,
     };
     setWorkExperienceForms([...workExperienceForms, newForm]);
   };
 
-  // Visibility
+  const handleRemoveWorkExperienceForm = (id) => {
+    setWorkExperienceForms(workExperienceForms.filter((form) => form.id !== id));
+  };
+
+  const toggleWorkExperienceFormVisibility = (id) => {
+    setWorkExperienceForms((currentForms) =>
+      currentForms.map((form) => (form.id === id ? { ...form, isVisible: !form.isVisible } : form))
+    );
+  };
 
   return (
     <>
@@ -104,26 +114,34 @@ function App() {
                 formId={form.id}
                 formData={form}
                 onFormSubmit={(formData) => handleEducationFormSubmit(form.id, formData)}
-                toggleForm={() => toggleFormVisibility(form.id)}
+                toggleForm={() => toggleEducationFormVisibility(form.id)}
                 deleteForm={() => handleRemoveEducationForm(form.id)}
               />
             </React.Fragment>
           ) : (
-            <button key={form.id} onClick={() => toggleFormVisibility(form.id)}>
+            <button key={form.id} onClick={() => toggleEducationFormVisibility(form.id)}>
               {form.schoolName === '' ? 'Edit' : 'Edit: ' + form.schoolName}
             </button>
           )
         )}
         <button onClick={handleAddEducationForm}>Add More Education</button>
 
-        {workExperienceForms.map((form) => (
-          <WorkExperienceForm
-            key={form.id}
-            formId={form.id}
-            formData={form}
-            onFormSubmit={(formData) => handleWorkExperienceFormSubmit(form.id, formData)}
-          />
-        ))}
+        {workExperienceForms.map((form) =>
+          form.isVisible ? (
+            <WorkExperienceForm
+              key={form.id}
+              formId={form.id}
+              formData={form}
+              onFormSubmit={(formData) => handleWorkExperienceFormSubmit(form.id, formData)}
+              toggleForm={() => toggleWorkExperienceFormVisibility(form.id)}
+              deleteForm={() => handleRemoveWorkExperienceForm(form.id)}
+            />
+          ) : (
+            <button key={form.id} onClick={() => toggleWorkExperienceFormVisibility(form.id)}>
+              {form.companyName === '' ? 'Edit' : 'Edit: ' + form.companyName}
+            </button>
+          )
+        )}
         <button onClick={handleAddWorkExperienceForm}>Add More Work Experience</button>
       </div>
 
