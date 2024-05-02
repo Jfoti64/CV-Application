@@ -35,7 +35,7 @@ function App() {
 
   const handleEducationFormSubmit = (id, formData) => {
     setEducationForms((currentForms) =>
-      currentForms.map((form) => (form.id === id ? { ...formData, id: form.id } : form))
+      currentForms.map((form) => (form.id === id ? { ...form, ...formData } : form))
     );
   };
 
@@ -53,6 +53,12 @@ function App() {
 
   const handleRemoveEducationForm = (id) => {
     setEducationForms(educationForms.filter((form) => form.id !== id));
+  };
+
+  const toggleFormVisibility = (id) => {
+    setEducationForms((currentForms) =>
+      currentForms.map((form) => (form.id === id ? { ...form, isVisible: !form.isVisible } : form))
+    );
   };
 
   // Work experience
@@ -86,11 +92,6 @@ function App() {
   };
 
   // Visibility
-  const toggleFormVisibility = (id) => {
-    setEducationForms((currentForms) =>
-      currentForms.map((form) => (form.id === id ? { ...form, isVisible: !form.isVisible } : form))
-    );
-  };
 
   return (
     <>

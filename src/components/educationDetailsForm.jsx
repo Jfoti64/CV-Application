@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import Input from './input';
 
-function EducationDetailsForm({ onFormSubmit, toggleForm, deleteForm }) {
+function EducationDetailsForm({ onFormSubmit, toggleForm, deleteForm, formData }) {
   const [localFormData, setLocalFormData] = useState({
-    schoolName: '',
-    titleOfStudy: '',
-    startDate: '',
-    endDate: '',
+    formId: formData.formId,
+    schoolName: formData.schoolName,
+    titleOfStudy: formData.titleOfStudy,
+    startDate: formData.startDate,
+    endDate: formData.endDate,
   });
 
   const handleChange = (e) => {
@@ -19,9 +20,8 @@ function EducationDetailsForm({ onFormSubmit, toggleForm, deleteForm }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFormSubmit(localFormData, () => {
-      toggleForm();
-    });
+    onFormSubmit(localFormData);
+    toggleForm();
   };
 
   return (
