@@ -23,7 +23,14 @@ function App() {
 
   // Education details
   const [educationForms, setEducationForms] = useState([
-    { id: uuidv4(), schoolName: '', titleOfStudy: '', startDate: '', endDate: '' },
+    {
+      id: uuidv4(),
+      schoolName: '',
+      titleOfStudy: '',
+      startDate: '',
+      endDate: '',
+      isVisible: true,
+    },
   ]);
 
   const handleEducationFormSubmit = (id, formData) => {
@@ -39,8 +46,13 @@ function App() {
       titleOfStudy: '',
       startDate: '',
       endDate: '',
+      isVisible: true,
     };
     setEducationForms([...educationForms, newForm]);
+  };
+
+  const handleRemoveEducationForm = (id) => {
+    setEducationForms(educationForms.filter((form) => form.id !== id));
   };
 
   // Work experience
@@ -73,18 +85,34 @@ function App() {
     setWorkExperienceForms([...workExperienceForms, newForm]);
   };
 
+  // Visibility
+  const toggleFormVisibility = (id) => {
+    setEducationForms((currentForms) =>
+      currentForms.map((form) => (form.id === id ? { ...form, isVisible: !form.isVisible } : form))
+    );
+  };
+
   return (
     <>
       <div className="left">
         <PersonalDetailsForm onFormSubmit={handlePersonalDetailsFormSubmit} />
-        {educationForms.map((form) => (
-          <EducationDetailsForm
-            key={form.id}
-            formId={form.id}
-            formData={form}
-            onFormSubmit={(formData) => handleEducationFormSubmit(form.id, formData)}
-          />
-        ))}
+        {educationForms.map((form) =>
+          form.isVisible ? (
+            <React.Fragment key={form.id}>
+              <EducationDetailsForm
+                formId={form.id}
+                formData={form}
+                onFormSubmit={(formData) => handleEducationFormSubmit(form.id, formData)}
+                toggleForm={() => toggleFormVisibility(form.id)}
+                deleteForm={() => handleRemoveEducationForm(form.id)}
+              />
+            </React.Fragment>
+          ) : (
+            <button key={form.id} onClick={() => toggleFormVisibility(form.id)}>
+              {form.schoolName === '' ? 'Edit' : 'Edit: ' + form.schoolName}
+            </button>
+          )
+        )}
         <button onClick={handleAddEducationForm}>Add More Education</button>
 
         {workExperienceForms.map((form) => (
@@ -102,17 +130,17 @@ function App() {
         <PersonalDetailsDisplay formData={personalDetailsFormData} />
         <h1>Education Information:</h1>
         {educationForms.map((form) => (
-          <>
-            <EducationDetailsDisplay key={form.id} formData={form} />
+          <React.Fragment key={form.id}>
+            <EducationDetailsDisplay formData={form} />
             <br />
-          </>
+          </React.Fragment>
         ))}
         <h1>Work Experience:</h1>
         {workExperienceForms.map((form) => (
-          <>
-            <WorkExperienceDisplay key={form.id} formData={form} />
+          <React.Fragment key={form.id}>
+            <WorkExperienceDisplay formData={form} />
             <br />
-          </>
+          </React.Fragment>
         ))}
       </div>
     </>

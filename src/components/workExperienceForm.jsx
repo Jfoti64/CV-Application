@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from './input';
 
-function workExperienceForm({ onFormSubmit }) {
+function WorkExperienceForm({ onFormSubmit }) {
   const [localFormData, setLocalFormData] = useState({
     companyName: '',
     positionTitle: '',
@@ -63,4 +63,4 @@ function workExperienceForm({ onFormSubmit }) {
   );
 }
 
-export default workExperienceForm;
+export default WorkExperienceForm;

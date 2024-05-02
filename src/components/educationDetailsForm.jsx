@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from './input';
 
-function EducationDetailsForm({ onFormSubmit }) {
+function EducationDetailsForm({ onFormSubmit, toggleForm, deleteForm }) {
   const [localFormData, setLocalFormData] = useState({
     schoolName: '',
     titleOfStudy: '',
@@ -19,8 +19,9 @@ function EducationDetailsForm({ onFormSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(localFormData);
-    onFormSubmit(localFormData);
+    onFormSubmit(localFormData, () => {
+      toggleForm();
+    });
   };
 
   return (
@@ -52,6 +53,10 @@ function EducationDetailsForm({ onFormSubmit }) {
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
+      <button type="button" onClick={toggleForm}>
+        Cancel
+      </button>
+      <button onClick={deleteForm}>Delete</button>
     </form>
   );
 }
