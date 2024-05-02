@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Input from './input';
 
-function PersonalDetailsForm({ onFormSubmit }) {
+function EducationDetailsForm({ onFormSubmit }) {
   const [localFormData, setLocalFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    placeOfBirth: '',
+    schoolName: '',
+    titleOfStudy: '',
+    startDate: '',
+    endDate: '',
   });
 
   const handleChange = (e) => {
@@ -20,34 +19,36 @@ function PersonalDetailsForm({ onFormSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(localFormData);
     onFormSubmit(localFormData);
   };
 
   return (
     <form onSubmit={handleSubmit} className="personalDetailsForm">
       <Input
-        label="First name: "
-        name="firstName"
-        value={localFormData.firstName}
+        label="School: "
+        name="schoolName"
+        value={localFormData.schoolName}
         onChange={handleChange}
       />
       <Input
-        label="Last name: "
-        name="lastName"
-        value={localFormData.lastName}
-        onChange={handleChange}
-      />
-      <Input label="Email: " name="email" value={localFormData.email} onChange={handleChange} />
-      <Input
-        label="Phone Number: "
-        name="phoneNumber"
-        value={localFormData.phoneNumber}
+        label="Title of study: "
+        name="titleOfStudy"
+        value={localFormData.titleOfStudy}
         onChange={handleChange}
       />
       <Input
-        label="Place of Birth: "
-        name="placeOfBirth"
-        value={localFormData.placeOfBirth}
+        type="date"
+        label="Start date: "
+        name="startDate"
+        value={localFormData.startDate}
+        onChange={handleChange}
+      />
+      <Input
+        type="date"
+        label="End date: "
+        name="endDate"
+        value={localFormData.endDate}
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
@@ -55,4 +56,4 @@ function PersonalDetailsForm({ onFormSubmit }) {
   );
 }
 
-export default PersonalDetailsForm;
+export default EducationDetailsForm;
