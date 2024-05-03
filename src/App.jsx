@@ -10,12 +10,12 @@ import WorkExperienceDisplay from './components/workExperienceDisplay';
 function App() {
   // Personal details
   const [personalDetailsFormData, setPersonalDetailsFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    placeOfBirth: '',
-    isVisible: false,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'john.doe@example.com',
+    phoneNumber: '555-1234',
+    placeOfBirth: 'Springfield',
+    isVisible: true, // Set to true to show the form by default
   });
 
   const handlePersonalDetailsFormSubmit = (data, callback) => {
@@ -33,10 +33,10 @@ function App() {
   const [educationForms, setEducationForms] = useState([
     {
       id: uuidv4(),
-      schoolName: '',
-      titleOfStudy: '',
-      startDate: '',
-      endDate: '',
+      schoolName: 'Springfield University',
+      titleOfStudy: 'Computer Science',
+      startDate: '2019-08-01',
+      endDate: '2023-05-01',
       isVisible: true,
     },
   ]);
@@ -73,11 +73,12 @@ function App() {
   const [workExperienceForms, setWorkExperienceForms] = useState([
     {
       id: uuidv4(),
-      companyName: '',
-      positionTitle: '',
-      jobResponsibilities: '',
-      startDate: '',
-      endDate: '',
+      companyName: 'Tech Innovations Inc.',
+      positionTitle: 'Software Developer',
+      jobResponsibilities:
+        'Developed and maintained client websites using JavaScript, React, and CSS.',
+      startDate: '2023-06-01',
+      endDate: '2024-05-01',
       isVisible: true,
     },
   ]);
