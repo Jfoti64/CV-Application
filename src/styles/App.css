@@ -2,8 +2,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+  display: flex;
+
   gap: 30px;
 }
 
@@ -22,6 +22,15 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-width: 300px;
+}
+
+.workExperienceForm textarea {
+  resize: vertical;
+}
+
+.workExperience p {
+  max-width: 600px;
 }
 
 .left label {
@@ -33,6 +42,7 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+input {
+  margin: 5px;
+  height: 20px;
 }

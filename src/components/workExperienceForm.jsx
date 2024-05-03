@@ -25,7 +25,7 @@ function WorkExperienceForm({ onFormSubmit, toggleForm, deleteForm, formData }) 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="personalDetailsForm">
+    <form onSubmit={handleSubmit} className="workExperienceForm">
       <Input
         label="Company Name: "
         name="companyName"
@@ -38,12 +38,14 @@ function WorkExperienceForm({ onFormSubmit, toggleForm, deleteForm, formData }) 
         value={localFormData.positionTitle}
         onChange={handleChange}
       />
-      <Input
-        label={'Job Responsibilities'}
-        name="jobResponsibilities"
-        value={localFormData.jobResponsibilities}
-        onChange={handleChange}
-      />
+      <label>
+        {'Job Responsibilities'}
+        <textarea
+          name="jobResponsibilities"
+          value={localFormData.jobResponsibilities}
+          onChange={handleChange}
+        />
+      </label>
       <Input
         type="date"
         label="Start date: "

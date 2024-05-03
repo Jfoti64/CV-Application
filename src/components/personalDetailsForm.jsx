@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import Input from './input';
 
-function PersonalDetailsForm({ onFormSubmit, toggleForm }) {
+function PersonalDetailsForm({ onFormSubmit, toggleForm, formData }) {
   const [localFormData, setLocalFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    placeOfBirth: '',
+    firstName: formData.firstName,
+    lastName: formData.lastName,
+    email: formData.email,
+    phoneNumber: formData.phoneNumber,
+    placeOfBirth: formData.placeOfBirth,
   });
 
   const handleChange = (e) => {

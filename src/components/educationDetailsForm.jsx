@@ -25,7 +25,7 @@ function EducationDetailsForm({ onFormSubmit, toggleForm, deleteForm, formData }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="personalDetailsForm">
+    <form onSubmit={handleSubmit} className="educationDetailsForm">
       <Input
         label="School: "
         name="schoolName"

@@ -119,6 +119,7 @@ function App() {
           <PersonalDetailsForm
             onFormSubmit={(formData) => handlePersonalDetailsFormSubmit(formData)}
             toggleForm={() => togglePersonalDetailsFormVisibility()}
+            formData={personalDetailsFormData}
           />
         ) : (
           <button onClick={() => togglePersonalDetailsFormVisibility()}>
@@ -171,13 +172,15 @@ function App() {
             <br />
           </React.Fragment>
         ))}
-        <h1>Work Experience:</h1>
-        {workExperienceForms.map((form) => (
-          <React.Fragment key={form.id}>
-            <WorkExperienceDisplay formData={form} />
-            <br />
-          </React.Fragment>
-        ))}
+        <div className="workExperience">
+          <h1>Work Experience:</h1>
+          {workExperienceForms.map((form) => (
+            <React.Fragment key={form.id}>
+              <WorkExperienceDisplay formData={form} />
+              <br />
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </>
   );
