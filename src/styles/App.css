@@ -42,7 +42,13 @@
   padding: 2em;
 }
 
-input {
+input,
+textarea {
   margin: 5px;
   height: 20px;
+  font-size: 1rem;
+}
+
+p {
+  font-size: 1rem;
 }
