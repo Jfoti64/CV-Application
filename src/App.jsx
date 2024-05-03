@@ -15,10 +15,18 @@ function App() {
     email: '',
     phoneNumber: '',
     placeOfBirth: '',
+    isVisible: false,
   });
 
-  const handlePersonalDetailsFormSubmit = (data) => {
-    setPersonalDetailsFormData(data);
+  const handlePersonalDetailsFormSubmit = (data, callback) => {
+    setPersonalDetailsFormData(data, callback);
+  };
+
+  const togglePersonalDetailsFormVisibility = () => {
+    setPersonalDetailsFormData((prevState) => ({
+      ...prevState,
+      isVisible: !prevState.isVisible,
+    }));
   };
 
   // Education details
@@ -106,7 +114,16 @@ function App() {
   return (
     <>
       <div className="left">
-        <PersonalDetailsForm onFormSubmit={handlePersonalDetailsFormSubmit} />
+        {personalDetailsFormData.isVisible ? (
+          <PersonalDetailsForm
+            onFormSubmit={(formData) => handlePersonalDetailsFormSubmit(formData)}
+            toggleForm={() => togglePersonalDetailsFormVisibility()}
+          />
+        ) : (
+          <button onClick={() => togglePersonalDetailsFormVisibility()}>
+            {'Edit Personal Details '}
+          </button>
+        )}
         {educationForms.map((form) =>
           form.isVisible ? (
             <React.Fragment key={form.id}>
@@ -125,7 +142,6 @@ function App() {
           )
         )}
         <button onClick={handleAddEducationForm}>Add More Education</button>
-
         {workExperienceForms.map((form) =>
           form.isVisible ? (
             <WorkExperienceForm

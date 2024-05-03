@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Input from './input';
 
-function PersonalDetailsForm({ onFormSubmit }) {
+function PersonalDetailsForm({ onFormSubmit, toggleForm }) {
   const [localFormData, setLocalFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,7 +20,7 @@ function PersonalDetailsForm({ onFormSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFormSubmit(localFormData);
+    onFormSubmit(localFormData, toggleForm);
   };
 
   return (
@@ -51,6 +51,9 @@ function PersonalDetailsForm({ onFormSubmit }) {
         onChange={handleChange}
       />
       <button type="submit">Submit</button>
+      <button type="button" onClick={toggleForm}>
+        Cancel
+      </button>
     </form>
   );
 }
